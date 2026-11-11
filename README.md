@@ -5,6 +5,14 @@
 > `src/app/apple-icon.png`, the `connect` theme in
 > `src/app/globals.css` + `src/lib/themes.ts`, and the `Sidebar.title`
 > / `Metadata.description` strings in `messages/*.json`.
+> Supabase signup stays **on** so the app's invite links work, but
+> `wmf/signup-allowlist.sql` gates who may actually register: a
+> BEFORE INSERT trigger on `auth.users` checks
+> `public.signup_allowlist`, whose rows are either a full email address
+> or a `@domain` suffix. To let someone new in, insert their address
+> there first. A blocked attempt shows `SignupPage.notAllowed` instead
+> of GoTrue's bare "Database error saving new user".
+>
 > Everything else tracks upstream — pull updates with
 > `git pull upstream main`.
 

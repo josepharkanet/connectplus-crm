@@ -90,7 +90,16 @@ function SignupPageInner() {
     });
 
     if (error) {
-      setError(error.message);
+      // This instance gates who may register with an allowlist
+      // (public.signup_allowlist, enforced by a BEFORE INSERT trigger on
+      // auth.users). A rejected address comes back from GoTrue as a bare
+      // "Database error saving new user" / unexpected_failure, which tells
+      // the person nothing. Translate it; any other error passes through
+      // untouched so real faults stay visible.
+      const blocked =
+        /database error saving new user/i.test(error.message) ||
+        (error as { code?: string }).code === "unexpected_failure";
+      setError(blocked ? t("notAllowed") : error.message);
       setLoading(false);
       return;
     }

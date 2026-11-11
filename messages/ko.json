@@ -2250,7 +2250,8 @@
     "creating": "계정 만드는 중...",
     "submit": "계정 만들기",
     "haveAccount": "이미 계정이 있으신가요?",
-    "signIn": "로그인"
+    "signIn": "로그인",
+    "notAllowed": "이 이메일 주소는 Connect+ CRM에 등록되어 있지 않습니다. 관리자에게 추가를 요청한 뒤 다시 시도하세요."
   },
   "ForgotPasswordPage": {
     "checkEmailTitle": "이메일을 확인하세요",

@@ -2250,7 +2250,8 @@
     "creating": "Creando cuenta...",
     "submit": "Crear cuenta",
     "haveAccount": "¿Ya tienes una cuenta?",
-    "signIn": "Iniciar sesión"
+    "signIn": "Iniciar sesión",
+    "notAllowed": "Esta dirección de correo no está aprobada para Connect+ CRM. Pide al administrador que la añada e inténtalo de nuevo."
   },
   "ForgotPasswordPage": {
     "checkEmailTitle": "Revisa tu correo",

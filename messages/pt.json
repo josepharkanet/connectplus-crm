@@ -2250,7 +2250,8 @@
     "creating": "Criando conta...",
     "submit": "Criar conta",
     "haveAccount": "Já tem uma conta?",
-    "signIn": "Entrar"
+    "signIn": "Entrar",
+    "notAllowed": "Este endereço de e-mail não está aprovado para o Connect+ CRM. Peça ao administrador para adicioná-lo e tente novamente."
   },
   "ForgotPasswordPage": {
     "checkEmailTitle": "Verifique seu e-mail",
