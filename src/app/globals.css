@@ -187,6 +187,26 @@ html[data-theme="emerald"] {
   --sidebar-ring: oklch(0.62 0.16 162);
 }
 
+html[data-theme="connect"] {
+  /* World Malayalee Federation Connect+ brand blue, oklch(0.522 0.138 250.5)
+     == #186cb5, sampled straight off the Connect+ mark so buttons, links
+     and the logo are literally the same colour. White on it is 5.46:1
+     (AA for the button labels); as accent text on the dark surfaces it
+     is 3.68:1, which is why it is used for links and icons, not body
+     copy. */
+  --primary: oklch(0.522 0.138 250.5);
+  --primary-foreground: oklch(0.985 0 0);
+  --primary-hover: oklch(0.60 0.135 250.5);
+  --primary-soft: oklch(0.522 0.138 250.5 / 0.14);
+  --primary-soft-2: oklch(0.522 0.138 250.5 / 0.24);
+  --ring: oklch(0.60 0.135 250.5);
+  --chart-1: oklch(0.522 0.138 250.5);
+  --chart-2: oklch(0.72 0.11 228);
+  --sidebar-primary: oklch(0.522 0.138 250.5);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-ring: oklch(0.60 0.135 250.5);
+}
+
 html[data-theme="cobalt"] {
   --primary: oklch(0.585 0.2 254);
   --primary-foreground: oklch(0.985 0 0);

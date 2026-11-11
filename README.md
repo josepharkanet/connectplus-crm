@@ -1,3 +1,13 @@
+> **Connect+ CRM** — World Malayalee Federation's branded fork of
+> [ArnasDon/wacrm](https://github.com/ArnasDon/wacrm) (MIT).
+> Runs at `crm.wmfglobal.org` against the federation's self-hosted
+> Supabase. Branding lives in `public/brand/`, `src/app/icon.png`,
+> `src/app/apple-icon.png`, the `connect` theme in
+> `src/app/globals.css` + `src/lib/themes.ts`, and the `Sidebar.title`
+> / `Metadata.description` strings in `messages/*.json`.
+> Everything else tracks upstream — pull updates with
+> `git pull upstream main`.
+
 # wacrm — CRM Template for WhatsApp
 
 > Self-hostable CRM template for WhatsApp® — shared inbox, contacts,

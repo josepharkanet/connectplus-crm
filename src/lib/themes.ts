@@ -14,6 +14,7 @@
  */
 
 export const THEME_IDS = [
+  "connect",
   "violet",
   "emerald",
   "cobalt",
@@ -23,7 +24,7 @@ export const THEME_IDS = [
 
 export type ThemeId = (typeof THEME_IDS)[number];
 
-export const DEFAULT_THEME: ThemeId = "violet";
+export const DEFAULT_THEME: ThemeId = "connect";
 
 export const STORAGE_KEY = "wacrm.theme";
 
@@ -67,6 +68,12 @@ export interface ThemeMeta {
 }
 
 export const THEMES: ReadonlyArray<ThemeMeta> = [
+  {
+    id: "connect",
+    name: "Connect+",
+    tagline: "World Malayalee Federation Connect+ blue, the default.",
+    swatch: "oklch(0.522 0.138 250.5)",
+  },
   {
     id: "violet",
     name: "Violet",
