@@ -313,3 +313,46 @@ describe('buildSendComponents — named variables', () => {
     });
   });
 });
+
+describe('buildSendComponents — authentication OTP button', () => {
+  const OTP_URL =
+    'https://www.whatsapp.com/otp/code/?otp_type=COPY_CODE&code_expiration_minutes=10&code=otp{{1}}';
+
+  const otpRow = () =>
+    row({
+      name: 'wmf_verification_code',
+      category: 'Authentication',
+      body_text: '*{{1}}* is your verification code.',
+      buttons: [{ type: 'URL', text: 'Copy code', url: OTP_URL }],
+    });
+
+  it('fills the OTP button from the body code when no buttonParams given', () => {
+    expect(buildSendComponents(otpRow(), { body: ['123456'] })).toEqual([
+      { type: 'body', parameters: [{ type: 'text', text: '123456' }] },
+      {
+        type: 'button',
+        sub_type: 'url',
+        index: '0',
+        parameters: [{ type: 'text', text: '123456' }],
+      },
+    ]);
+  });
+
+  it('lets an explicit buttonParams entry win over the body value', () => {
+    const out = buildSendComponents(otpRow(), {
+      body: ['123456'],
+      buttonParams: { 0: '999999' },
+    });
+    expect(out[1].parameters).toEqual([{ type: 'text', text: '999999' }]);
+  });
+
+  it('does not touch a normal URL button that is not a WhatsApp OTP link', () => {
+    const plain = row({
+      body_text: 'Track it here.',
+      buttons: [
+        { type: 'URL', text: 'Track', url: 'https://example.com/t/{{1}}' },
+      ],
+    });
+    expect(() => buildSendComponents(plain, { body: ['ABC'] })).toThrow();
+  });
+});

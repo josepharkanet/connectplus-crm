@@ -233,6 +233,39 @@ function buildButtonComponent(
 }
 
 /**
+ * True for the URL button WhatsApp generates behind an AUTHENTICATION
+ * template's OTP button. Meta does not store these as COPY_CODE: it
+ * rewrites them into a URL button pointing at
+ * `https://www.whatsapp.com/otp/code/?...&code=otp{{1}}`.
+ */
+function isOtpUrlButton(button: TemplateButton): boolean {
+  return (
+    button.type === 'URL' &&
+    /^https:\/\/(www\.)?whatsapp\.com\/otp\//i.test(button.url ?? '')
+  );
+}
+
+/**
+ * The code an OTP button should carry when the caller did not name one.
+ *
+ * An authentication template renders the same code twice — once in the
+ * body, once inside the button's URL — and Meta rejects the send unless
+ * both are supplied. Callers naturally pass only the body values (that
+ * is all every other template needs), and would otherwise get
+ * `urlButtonParamRequired` thrown at them for a value they already
+ * provided. So default the OTP button to the first body value. An
+ * explicit `buttonParams` entry still wins.
+ */
+function otpButtonFallback(
+  button: TemplateButton,
+  bodyValues: string[] | undefined,
+): string | undefined {
+  if (!isOtpUrlButton(button)) return undefined;
+  const first = bodyValues?.[0];
+  return typeof first === 'string' && first.trim() ? first : undefined;
+}
+
+/**
  * Build the full `components` array for the send-message payload.
  * Returns an empty array when the template is fully static (no
  * variables, no media header), which is a valid Meta request.
@@ -248,7 +281,8 @@ export function buildSendComponents(
   if (body) out.push(body);
   if (template.buttons?.length) {
     template.buttons.forEach((btn, i) => {
-      const override = params.buttonParams?.[i];
+      const override =
+        params.buttonParams?.[i] ?? otpButtonFallback(btn, params.body);
       const component = buildButtonComponent(btn, i, override);
       if (component) out.push(component);
     });
